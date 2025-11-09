@@ -1,4 +1,7 @@
 
+using E_Commerce.Persistence.Data.Contexts;
+using Microsoft.EntityFrameworkCore;
+
 namespace E_Commerce.Web
 {
     public class Program
@@ -10,6 +13,10 @@ namespace E_Commerce.Web
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddDbContext<StoreDbContext>(optios =>
+            { 
+                optios.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
 
