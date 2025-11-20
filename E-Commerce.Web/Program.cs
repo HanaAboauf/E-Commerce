@@ -3,6 +3,7 @@ using E_Commerce.Domain.Contracts;
 using E_Commerce.Persistence.Data.Contexts;
 using E_Commerce.Persistence.Data.DataSeed;
 using E_Commerce.Persistence.Repositories;
+using E_Commerce.Services.Profiles;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_Commerce.Web
@@ -21,6 +22,7 @@ namespace E_Commerce.Web
             {
                 optios.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+            builder.Services.AddAutoMapper(x => x.AddProfile<ProductProfile>());
             builder.Services.AddScoped<IDataInitializer,DataInitializer>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
