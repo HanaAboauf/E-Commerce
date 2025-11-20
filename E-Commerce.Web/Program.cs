@@ -2,6 +2,7 @@
 using E_Commerce.Domain.Contracts;
 using E_Commerce.Persistence.Data.Contexts;
 using E_Commerce.Persistence.Data.DataSeed;
+using E_Commerce.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_Commerce.Web
@@ -21,6 +22,7 @@ namespace E_Commerce.Web
                 optios.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
             builder.Services.AddScoped<IDataInitializer,DataInitializer>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi(); 
             #endregion
@@ -33,7 +35,7 @@ namespace E_Commerce.Web
             var dbService = scope.ServiceProvider.GetRequiredService<StoreDbContext>();
             if (dbService.Database.GetPendingMigrations().Any()) dbService.Database.Migrate();
             var dataInitializerService = scope.ServiceProvider.GetRequiredService<IDataInitializer>();
-            dataInitializerService.Initialize();
+            dataInitializerService.InitializeAsync();
 
             #endregion
 
