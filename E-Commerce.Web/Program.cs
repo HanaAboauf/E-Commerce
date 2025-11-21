@@ -3,7 +3,9 @@ using E_Commerce.Domain.Contracts;
 using E_Commerce.Persistence.Data.Contexts;
 using E_Commerce.Persistence.Data.DataSeed;
 using E_Commerce.Persistence.Repositories;
+using E_Commerce.Services;
 using E_Commerce.Services.Profiles;
+using E_Commerce.Services_Abstraction;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_Commerce.Web
@@ -22,11 +24,14 @@ namespace E_Commerce.Web
             {
                 optios.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
-            builder.Services.AddAutoMapper(x => x.AddProfile<ProductProfile>());
+            builder.Services.AddAutoMapper(typeof(ServicesAssemblyReference).Assembly);
             builder.Services.AddScoped<IDataInitializer,DataInitializer>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IProductService, ProductService>();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi(); 
+            //builder.Services.AddOpenApi();
+            builder.Services.AddSwaggerGen();
+
             #endregion
 
 
@@ -45,9 +50,11 @@ namespace E_Commerce.Web
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi();
+                //app.MapOpenApi();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
-
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
