@@ -33,8 +33,10 @@ namespace E_Commerce.Web
             builder.Services.AddScoped<IDataInitializer,DataInitializer>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+            builder.Services.AddScoped<IBasketService, BasketService>();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            //builder.Services.AddOpenApi();
+            
             builder.Services.AddSwaggerGen();
 
             #endregion
@@ -55,7 +57,6 @@ namespace E_Commerce.Web
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                //app.MapOpenApi();
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
