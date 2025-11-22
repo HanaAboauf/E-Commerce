@@ -22,7 +22,7 @@ namespace E_Commerce.Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>>GetAllProductsAsync([FromQuery]ProductQueryParams queryParams)
+        public async Task<ActionResult<PagenatedResult<ProductDTO>>>GetAllProductsAsync([FromQuery]ProductQueryParams queryParams)
         {
             var products = await _ProductService.GetAllProductsAsync(queryParams);
             return Ok(products);
