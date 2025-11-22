@@ -7,6 +7,7 @@ using E_Commerce.Services;
 using E_Commerce.Services.Profiles;
 using E_Commerce.Services_Abstraction;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 
 namespace E_Commerce.Web
 {
@@ -23,6 +24,10 @@ namespace E_Commerce.Web
             builder.Services.AddDbContext<StoreDbContext>(optios =>
             {
                 optios.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+            builder.Services.AddSingleton<IConnectionMultiplexer>(PS =>
+            {
+                return ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("RedisConnection")!);
             });
             builder.Services.AddAutoMapper(typeof(ServicesAssemblyReference).Assembly);
             builder.Services.AddScoped<IDataInitializer,DataInitializer>();
