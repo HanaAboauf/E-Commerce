@@ -1,4 +1,5 @@
 ﻿using E_Commerce.Presentation.Attributes;
+using E_Commerce.Services.Exceptions;
 using E_Commerce.Services_Abstraction;
 using E_Commerce.Shared;
 using E_Commerce.Shared.DTOs.ProductDTOs;
@@ -34,6 +35,7 @@ namespace E_Commerce.Presentation.Controllers
         public async Task<ActionResult<ProductDTO>> GetProductByIdAsync(int id)
         {
             var product = await _ProductService.GetProductByIdAsync(id);
+            if (product is null) throw new ProductNotFoundException(id);
             return Ok(product);
         }
 
