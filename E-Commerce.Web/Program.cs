@@ -35,6 +35,8 @@ namespace E_Commerce.Web
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<IBasketRepository, BasketRepository>();
             builder.Services.AddScoped<IBasketService, BasketService>();
+            builder.Services.AddScoped<ICacheRepository, CacheRepository>();
+            builder.Services.AddScoped<ICacheService, CacheService>();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             
             builder.Services.AddSwaggerGen();
