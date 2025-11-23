@@ -1,4 +1,5 @@
-﻿using E_Commerce.Services_Abstraction;
+﻿using E_Commerce.Services.Exceptions;
+using E_Commerce.Services_Abstraction;
 using E_Commerce.Shared.BasketDTOs;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -23,6 +24,7 @@ namespace E_Commerce.Presentation.Controllers
         public async Task<ActionResult<BasketDTO?>> GetBasketAsync([FromQuery]string id)
         {
             var basket = await _BasketService.GetBasketAsync(id);
+            if(basket is null ) throw new BasketNotFoundException(id);
             return Ok(basket);
         }
         [HttpPost]
