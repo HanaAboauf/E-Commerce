@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\E Commerce.Services\E-Commerce.Services.csproj" />
+    <ProjectReference Include="..\..\..\..\OneDrive\Documents\asp.net\C#\E-Commerce-master\E Commerce.Services\E-Commerce.Services.csproj" />
     <ProjectReference Include="..\E-Commerce.Services Abstraction\E-Commerce.Services Abstraction.csproj" />
   </ItemGroup>
   <ItemGroup>
